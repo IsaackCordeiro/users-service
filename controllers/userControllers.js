@@ -12,7 +12,7 @@ exports.create = async (req, res) => {
 exports.findAll = async (req, res) => {
   try {
     const users = await userService.findAll();
-    res.status(200).json(users);
+    res.status(200).json(users);                                                                                                                                         
   } catch (error) {
     res.status(500).json({ erro: error.message });
   }
