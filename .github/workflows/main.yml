@@ -65,3 +65,22 @@ jobs:
           # Envia as duas versões para a AWS
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:$IMAGE_TAG
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
+      
+      - name: Preencher o novo ID da imagem no Task Definition
+        id: task-def
+        uses: aws-actions/amazon-ecs-render-task-definition@v1
+        with:
+          task-definition: task-definition.json
+          container-name: users-service
+          image: ${{ steps.login-ecr.outputs.registry }}/trabalho-final/users-service:${{ github.sha }}
+
+      - name: Deploy no Amazon ECS (CodeDeploy Blue/Green)
+        uses: aws-actions/amazon-ecs-deploy-task-definition@v2
+        with:
+          task-definition: ${{ steps.task-def.outputs.task-definition }}
+          service: users-service-task-service-fbca5ghm
+          cluster: trabalho-final-cluster
+          wait-for-service-stability: true
+          codedeploy-appspec: appspec.yaml
+          codedeploy-application: AppECS-trabalho-final-cluster-users-service-task-service-fbca5ghm
+          codedeploy-deployment-group: DgpECS-trabalho-final-cluster-users-service-task-service-fbca5ghm

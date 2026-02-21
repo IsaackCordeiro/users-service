@@ -1,0 +1,102 @@
+{
+    "taskDefinitionArn": "arn:aws:ecs:us-east-1:451740670244:task-definition/users-service-task:2",
+    "containerDefinitions": [
+        {
+            "name": "users-service",
+            "image": "451740670244.dkr.ecr.us-east-1.amazonaws.com/trabalho-final/users-service@sha256:e7c70b8e620bb7e2c12009c5a60e63c8b6f7cb35fb3b13d122ef37b5d0e8d283",
+            "cpu": 0,
+            "portMappings": [
+                {
+                    "name": "users-service-port",
+                    "containerPort": 3001,
+                    "hostPort": 3001,
+                    "protocol": "tcp",
+                    "appProtocol": "http"
+                }
+            ],
+            "essential": true,
+            "environment": [],
+            "environmentFiles": [
+                {
+                    "value": "arn:aws:s3:::dotenv-trabalho-final/users-service.env",
+                    "type": "s3"
+                }
+            ],
+            "mountPoints": [],
+            "volumesFrom": [],
+            "ulimits": [],
+            "logConfiguration": {
+                "logDriver": "awslogs",
+                "options": {
+                    "awslogs-group": "/ecs/users-service-task",
+                    "awslogs-create-group": "true",
+                    "awslogs-region": "us-east-1",
+                    "awslogs-stream-prefix": "ecs"
+                },
+                "secretOptions": []
+            },
+            "systemControls": []
+        }
+    ],
+    "family": "users-service-task",
+    "taskRoleArn": "arn:aws:iam::451740670244:role/LabRole",
+    "executionRoleArn": "arn:aws:iam::451740670244:role/LabRole",
+    "networkMode": "awsvpc",
+    "revision": 2,
+    "volumes": [],
+    "status": "ACTIVE",
+    "requiresAttributes": [
+        {
+            "name": "com.amazonaws.ecs.capability.logging-driver.awslogs"
+        },
+        {
+            "name": "ecs.capability.execution-role-awslogs"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.ecr-auth"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.19"
+        },
+        {
+            "name": "ecs.capability.env-files.s3"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.21"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.task-iam-role"
+        },
+        {
+            "name": "ecs.capability.execution-role-ecr-pull"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.18"
+        },
+        {
+            "name": "ecs.capability.task-eni"
+        },
+        {
+            "name": "com.amazonaws.ecs.capability.docker-remote-api.1.29"
+        }
+    ],
+    "placementConstraints": [],
+    "compatibilities": [
+        "EC2",
+        "FARGATE",
+        "MANAGED_INSTANCES"
+    ],
+    "requiresCompatibilities": [
+        "FARGATE"
+    ],
+    "cpu": "256",
+    "memory": "512",
+    "runtimePlatform": {
+        "cpuArchitecture": "X86_64",
+        "operatingSystemFamily": "LINUX"
+    },
+    "registeredAt": "2026-02-21T14:35:44.249Z",
+    "registeredBy": "arn:aws:sts::451740670244:assumed-role/voclabs/user4471049=Isaack_Arcanjo",
+    "enableFaultInjection": false,
+    "tags": []
+}
